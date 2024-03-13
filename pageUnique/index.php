@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,10 +33,10 @@
             </div>
         </div>
     </div>
-    
+        
     <div class="price">
         <div class="price-box">
-            <div>
+            <div class="box price">
                 <table>
                     <thead>
                         <tr>
@@ -65,7 +65,7 @@
                 </table>
             </div>
             
-            <div class="price-box">
+            <div class="box price">
                 <table>
                     <thead>
                         <tr>
@@ -98,7 +98,7 @@
                 </table>
             </div>
 
-            <div class="price-box">
+            <div class="box price">
                 <table>
                     <thead>
                         <tr>
@@ -184,7 +184,7 @@
                     </div>
                 </div>
 
-                <div class="equipement">
+<!--                 <div class="equipement">
                     <h4>Equipement</h4>
                     <div class="">
                         <label for="salle">Préau</label>
@@ -226,13 +226,41 @@
                         <label for="service-AS">Aucun service</label>
                         <input type="radio" name="service" id="service-AS" checked>
                     </div>
-                </div>
+                </div> -->
 
-                <button type="submit" id="submit">Réserver</button>
+                <input type="submit" name="submit" id="submit" value="Réserver">
+                <!-- <input type="submit" id="submit">Réserver</input> -->
             </form>
         </div>
     </div>
 </main>
+
+<?php
+
+    if (isset($_POST['submit'])) {
+        $Fname = $_POST['Fname'];
+        $Lname = $_POST['Lname'];
+        $phone = $_POST['phone'];
+        $mail = $_POST['mail'];
+        $date = $_POST['date'];
+        $timeStart = $_POST['time-start'];
+        $timeEnd = $_POST['time-end'];
+
+        echo "
+            <ul>
+                <li>$Fname</li>
+                <li>$Lname</li>
+                <li>$phone</li>
+                <li>$mail</li>
+                <li>$date</li>
+                <li>$timeStart</li>
+                <li>$timeEnd</li>
+            </ul>
+        ";
+
+    }
+
+?>
 
 <footer>
     <h1>Lorem.</h1>
@@ -240,30 +268,3 @@
     
 </body>
 </html>
-
-<?php
-
-if (isset($_POST)) {
-    $Fname = $_POST['Fname'];
-    $Lname = $_POST['Lname'];
-    $phone = $_POST['phone'];
-    $mail = $_POST['mail'];
-    $date = $_POST['date'];
-    $timeStart = $_POST['time-start'];
-    $timeEnd = $_POST['time-end'];
-
-    echo "
-        <ul>
-            <li>$Fname</li>
-            <li>$Lname</li>
-            <li>$phone</li>
-            <li>$mail</li>
-            <li>$date</li>
-            <li>$timeStart</li>
-            <li>$timeEnd</li>
-        </ul>
-    ";
-
-}
-
-?>
