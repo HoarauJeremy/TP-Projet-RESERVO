@@ -20,7 +20,9 @@ service_reservee = (#idReservation, #idService);
 
 ## TODO
 
-- [ ] Faire une facture 
+- [ ] Faire une page facture 
+- [ ] ajouter regex
+- [ ] modifier DB
 - [ ] ...
 
 ![schemaBDD](./schemaBDD.png "schemaBD").
