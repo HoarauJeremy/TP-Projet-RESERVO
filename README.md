@@ -23,3 +23,4 @@ service_reservee = (#idReservation, #idService);
 - [ ] Faire une facture 
 - [ ] ...
 
+![SchemaBDD](./schemaBdd.png "schemaBD").
