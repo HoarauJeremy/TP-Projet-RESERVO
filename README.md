@@ -18,3 +18,8 @@ equipement_reservee = (#idReservation, #idEquipement);
 service_reservee = (#idReservation, #idService);
 ```
 
+## TODO
+
+> [] Faire une facture 
+> [] ...
+
