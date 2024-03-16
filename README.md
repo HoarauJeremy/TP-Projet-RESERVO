@@ -20,6 +20,6 @@ service_reservee = (#idReservation, #idService);
 
 ## TODO
 
-> [] Faire une facture 
-> [] ...
+- [ ] Faire une facture 
+- [ ] ...
 
