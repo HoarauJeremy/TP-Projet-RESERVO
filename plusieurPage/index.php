@@ -9,13 +9,7 @@
 <body>
 
 <header>
-    <h1>RESERVO</h1>
-
-    <nav>
-        <ul>
-            <li><a href="reservation.php">Réserver</a></li>
-        </ul>
-    </nav>
+    <h1><a href="index.php">RESERVO</a></h1>
 </header>
 
 <main>
@@ -154,7 +148,7 @@
 
 <footer>
     <p>RESERVO &copy;</p>
-    <a href="mention.php">Mention légal</a>
+    <a href="mentionLegale.php">Mention légal</a>
 </footer>
     
 </body>

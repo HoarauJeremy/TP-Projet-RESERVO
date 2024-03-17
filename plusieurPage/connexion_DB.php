@@ -54,7 +54,7 @@
                 $rqt->execute();
                 $rqt->closeCursor();
             } catch (\Exception $exception) {
-                throw $exception;
+                echo $exception->getMessage();
             }
         }
 
@@ -72,7 +72,7 @@
                 $rqt->execute();
                 $rqt->closeCursor();
             } catch (\Exception $exception) {
-                throw $exception;
+                echo $exception->getMessage();
             }
         }
 
@@ -91,7 +91,7 @@
                 }
                 $rqt->closeCursor();
             } catch (\Exception $exception) {
-                throw $exception;
+                echo $exception->getMessage();
             }
         }
 
@@ -112,7 +112,7 @@
                 
                 $rqt->closeCursor();
             } catch (\Exception $exception) {
-                throw $exception;
+                echo $exception->getMessage();
             }
         }
 
@@ -131,12 +131,12 @@
                 }
                 
                 $rqt->closeCursor();
-            } catch (\Exception $e) {
-                throw $e;
+            } catch (\Exception $exception) {
+                echo $exception->getMessage();
             }
         }
 
-        private function getIdUtilisateur() {
+        public function getIdUtilisateur() {
             try {
                 $sql = "SELECT idUtilisateur FROM utilisateur ORDER BY idUtilisateur DESC LIMIT 1;";
                 $rqt = $this->cnx->prepare($sql);
@@ -144,13 +144,13 @@
                 $id = $rqt->fetch(PDO::FETCH_ASSOC);
                 $rqt->closeCursor();
                 return $id['idUtilisateur'];
-            } catch (\Exception $e) {
-                throw $e;
+            } catch (\Exception $exception) {
+                echo $exception->getMessage();
             }
         }
 
         /**
-         * 
+         * Methode pour récupérée l'ID de la derniere Reservation
          */
         private function getIdReservation() {
             try {
@@ -160,8 +160,73 @@
                 $id = $rqt->fetch(PDO::FETCH_ASSOC);
                 $rqt->closeCursor();
                 return $id['idReservation'];
-            } catch (\Exception $e) {
-                throw $e;
+            } catch (\Exception $exception) {
+                echo $exception->getMessage();
+            }
+        }
+
+        public function getReservationUtilisateur($id) {
+            try {
+                $sql = "SELECT * FROM utilisateur u INNER JOIN reservation r ON u.`idUtilisateur` = r.`idUtilisateur` WHERE u.`idUtilisateur` = :id;";
+                $rqt = $this->cnx->prepare($sql);
+                $rqt->bindParam(':id', $id);
+                $rqt->execute();
+                $data = $rqt->fetchAll(PDO::FETCH_ASSOC);
+                $rqt->closeCursor();
+                return $data;
+            } catch (\Exception $exception) {
+                echo $exception->getMessage();
+            }
+        }
+
+        public function getReservationSalle($id) {
+            try {
+                $sql = "SELECT s.nom as salle FROM reservation r 
+                    INNER JOIN salle_reservee sr ON r.`idReservation` = sr.`idReservation`
+                    INNER JOIN salle s ON sr.`idSalle` = s.`idSalle`
+                    WHERE r.`idUtilisateur` = :id;";
+                $rqt = $this->cnx->prepare($sql);
+                $rqt->bindParam(':id', $id);
+                $rqt->execute();
+                $data = $rqt->fetchAll(PDO::FETCH_ASSOC);
+                $rqt->closeCursor();
+                return $data;
+            } catch (\Exception $exception) {
+                echo $exception->getMessage();
+            }
+        }
+
+        public function getReservationEquipement($id) {
+            try {
+                $sql = "SELECT e.nom as equipement, er.quantite as quantite FROM reservation r 
+                    INNER JOIN equipement_reservee er ON r.`idReservation` = er.`idReservation`
+                    INNER JOIN equipement e ON er.`idEquipement` = e.`idEquipement`
+                    WHERE r.`idUtilisateur` = :id;";
+                $rqt = $this->cnx->prepare($sql);
+                $rqt->bindParam(':id', $id);
+                $rqt->execute();
+                $data = $rqt->fetchAll(PDO::FETCH_ASSOC);
+                $rqt->closeCursor();
+                return $data;
+            } catch (\Exception $exception) {
+                echo $exception->getMessage();
+            }
+        }
+
+        public function getReservationService($id) {
+            try {
+                $sql = "SELECT srv.nom as service FROM reservation r 
+                    INNER JOIN service_reservee srv_r ON r.`idReservation` = srv_r.`idReservation`
+                    INNER JOIN service srv ON srv_r.`idService` = srv.`idService`
+                    WHERE r.`idUtilisateur` = :id;";
+                $rqt = $this->cnx->prepare($sql);
+                $rqt->bindParam(':id', $id);
+                $rqt->execute();
+                $data = $rqt->fetchAll(PDO::FETCH_ASSOC);
+                $rqt->closeCursor();
+                return $data;
+            } catch (\Exception $exception) {
+                echo $exception->getMessage();
             }
         }
         

@@ -30,10 +30,16 @@
     margin: 0;
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
+    list-style: none;
 }
 
 header{
     margin: 15px 25px;
+
+    & h1 a {
+        text-decoration: none;
+        color: black;
+    }
 }
 
 footer {
@@ -44,7 +50,6 @@ footer {
 }
 
 body {
-    /* background-color: #fefefe; */
     background-color: #f3f4f6;
 }
 
@@ -62,10 +67,9 @@ input[type=radio], input[type=checkbox], label, button {
     cursor: pointer;
 }
 
-.presentation, .price {
+.presentation {
     width: 100%;
     height: auto;
-    /* background-color: #252525; */
     text-align: center;
     padding: 15px 0;
 }
@@ -123,12 +127,14 @@ input[type=radio], input[type=checkbox], label, button {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding: 15px 0;
 }
 
 .reservation {
     width: 100%;
-    /* display: flex;
-    justify-content: center; */
 }
 
 .reservation-box {
@@ -165,6 +171,7 @@ input[type=radio], input[type=checkbox], label, button {
 .user div {
     display: flex;
     flex-direction: column;
+    margin: 15px 0;
 
     & label {
         font-size: 1em;
@@ -195,11 +202,6 @@ input[type=radio], input[type=checkbox], label, button {
     }
 }
 
-/* .equipement, .service {
-    display: flex;
-    flex-wrap: wrap;
-} */
-
 .reservation label::after {
     content: " :";
 }
@@ -207,8 +209,29 @@ input[type=radio], input[type=checkbox], label, button {
 .info {
     width: 80%;
     margin: 0 auto;
-    background-color: #fefefe;
+    background-color: #f3f4f6;
     font-size: 1.1em;
+}
+
+.mention {
+    width: 90%;
+    margin: 0 auto;
+
+    & h2 {
+        margin: 15px 0;
+        text-align: center;
+        font-size: 1.3em;
+    }
+
+    & h3 {
+        margin: 10px 0 3px;
+        font-size: 1.1em;
+    }
+}
+
+.recap {
+    width: 75%;
+    margin: 0 auto;
 }
 
 @media screen and (min-width: 680px) {
@@ -218,16 +241,7 @@ input[type=radio], input[type=checkbox], label, button {
         justify-content: center;
     }
 
-    .pres, .price {
-        width: 100%;
-        height: auto;
-        text-align: center;
-        padding: 15px 0;
-    }
-    
-    .pres-box, .price-box {
-        display: flex;
-        align-items: center;
+    .pres-box {
         justify-content: space-around;
     }
     
@@ -243,39 +257,29 @@ input[type=radio], input[type=checkbox], label, button {
     
     .reservation-box {
         width: 50%;
-        border-radius: 4px;
-        background-color: #123;
-        padding: 10px;
-        color: white;
-        -webkit-box-shadow: 5px 5px 15px 4px rgba(0,0,0,0.25); 
-        box-shadow: 5px 5px 15px 4px rgba(0,0,0,0.25); 
-    
-        /* & form button {
-            padding: 5px 10px;
-            border-radius: 5px;
-        } */
-        
     }
 
     .reservation-btn .btn {
         width: 30%;
     }
     
-    .user {
-        padding: 2px 5px;
-    }
-    
     .user div {
-        display: flex;
-        flex-direction: column;
+        margin: 5px 0;
     
         & label {
-            font-size: 1em;
+            font-size: 1.2em;
         }
-    
-        & input {
-            height: 35px;
-            font-size: 0.9em;
+    }
+
+    .mention {
+        width: 75%;
+
+        & h2 {
+            font-size: 1.6em;
+        }
+
+        .mention h3 {
+            font-size: 1.4em;
         }
     }
 

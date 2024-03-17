@@ -9,7 +9,7 @@ CREATE TABLE utilisateur(
     nom VARCHAR(50) NOT NULL,
     prenom VARCHAR(255) NOT NULL,
     telephone CHAR(10) NOT NULL,
-    courriel VARCHAR(255) NOT NULL UNIQUE,
+    courriel VARCHAR(255) NOT NULL,
     PRIMARY KEY(idUtilisateur)
 ) ENGINE=InnoDB DEFAULT CHARSET='utf8';
 

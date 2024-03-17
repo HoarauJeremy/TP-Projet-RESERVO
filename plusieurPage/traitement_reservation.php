@@ -80,4 +80,6 @@ if (isset($_POST['submit'])) {
     $cnx->insertSalleReservee($salle);
     $cnx->insertEquipementReservee($equipement);
     $cnx->insertServiceReservee($service);
+
+    header('Location: recap.php?utilisateur='.$cnx->getIdUtilisateur());
 }

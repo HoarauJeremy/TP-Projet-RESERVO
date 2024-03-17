@@ -9,7 +9,7 @@
 <body>
 
 <header>
-    <h1>RESERVO</h1>
+    <h1><a href="index.php">RESERVO</a></h1>
 </header>
 
 <main>
@@ -46,31 +46,32 @@
                         <label for="time-end">Heure de fin*</label>
                         <input type="time" name="time-end" id="time-end" required>
                     </div>
+                    <small>* Information nécessaire</small>
                 </div>
 
                 <div class="salle">
                     <h4>Salle</h4>
-                    <div class="">
+                    <div>
                         <label for="preau">Préau</label>
                         <input type="checkbox" name="preau" id="preau" value="1">
                     </div>
-                    <div class="">
+                    <div>
                         <label for="terrain">Terrain</label>
                         <input type="checkbox" name="terrain" id="terrain" value="2">
                     </div>
-                    <div class="">
+                    <div>
                         <label for="salle1">Salle 1</label>
                         <input type="checkbox" name="salle1" id="salle1" value="3">
                     </div>
-                    <div class="">
+                    <div>
                         <label for="salle2">Salle 2</label>
                         <input type="checkbox" name="salle2" id="salle2" value="4">
                     </div>
-                    <div class="">
+                    <div>
                         <label for="centreCulturel1">Centre culturel 1</label>
                         <input type="checkbox" name="centreCulturel1" id="centreCulturel1" value="5">
                     </div>
-                    <div class="">
+                    <div>
                         <label for="centreCulturel2">Centre culturel 2</label>
                         <input type="checkbox" name="centreCulturel2" id="centreCulturel2" value="6">
                     </div>
@@ -78,45 +79,45 @@
 
                 <div class="equipement">
                     <h4>Equipement</h4>
-                    <div class="">
+                    <div>
                         <label for="table">Table</label>
                         <input type="checkbox" name="table" id="table" value="1">
-                        <input type="number" name="nbTable" id="nbTable">
+                        <input type="number" name="nbTable" id="nbTable" min="0" value=0>
                     </div>
-                    <div class="">
+                    <div>
                         <label for="chaise">Chaise</label>
                         <input type="checkbox" name="chaise" id="chaise" value="2">
-                        <input type="number" name="nbChaise" id="nbChaise">
+                        <input type="number" name="nbChaise" id="nbChaise" min="0" value=0>
                     </div>
-                    <div class="">
+                    <div>
                         <label for="sono">Matériel de sonorisation</label>
                         <input type="checkbox" name="sono" id="sono" value="3">
-                        <input type="number" name="nbSono" id="nbSono">
+                        <input type="number" name="nbSono" id="nbSono" min="0" value=0>
                     </div>
-                    <div class="">
+                    <div>
                         <label for="chapiteau3-3">Chapiteau 3x3m</label>
                         <input type="checkbox" name="chapiteau3-3" id="chapiteau3-3" value="4">
-                        <input type="number" name="nbChapiteau3-3" id="nbChapiteau3-3">
+                        <input type="number" name="nbChapiteau3-3" id="nbChapiteau3-3" min="0" value=0>
                     </div>
-                    <div class="">
+                    <div>
                         <label for="chapiteau3-4">Chapiteau 3x4m</label>
                         <input type="checkbox" name="chapiteau3-4" id="chapiteau3-4" value="5">
-                        <input type="number" name="nbChapiteau3-4" id="nbChapiteau3-4">
+                        <input type="number" name="nbChapiteau3-4" id="nbChapiteau3-4" min="0" value=0>
                     </div>
-                    <div class="">
+                    <div>
                         <label for="chapiteau3-6">Chapiteau 3x6m</label>
                         <input type="checkbox" name="chapiteau3-6" id="chapiteau3-6" value="6">
-                        <input type="number" name="nbChapiteau3-6" id="nbChapiteau3-6">
+                        <input type="number" name="nbChapiteau3-6" id="nbChapiteau3-6" min="0" value="0">
                     </div>
                 </div>
 
                 <div class="service">
                     <h4>Service</h4>
-                    <div class="">
+                    <div>
                         <label for="service-MeP">Mise en place</label>
                         <input type="checkbox" name="service-MeP" id="service-MeP" value="1">
                     </div>
-                    <div class="">
+                    <div>
                         <label for="service-NeR">Nettoyage et Rangement</label>
                         <input type="checkbox" name="service-NeR" id="service-NeR" value="2">
                     </div>
