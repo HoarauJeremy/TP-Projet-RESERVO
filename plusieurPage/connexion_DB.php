@@ -66,8 +66,7 @@
                 $rqt->bindValue(':heureDebutReservation', $data[1]);
                 $rqt->bindValue(':heureFinReservation', $data[2]);
                 $rqt->bindValue(':prixTotal', $data[3], PDO::PARAM_INT);
-                
-                $rqt->bindValue(':idUtilisateur', $this->getIdUtilisateur(), PDO::PARAM_INT);
+                $rqt->bindValue(':idUtilisateur', $data[4], PDO::PARAM_INT);
 
                 $rqt->execute();
                 $rqt->closeCursor();
@@ -136,14 +135,18 @@
             }
         }
 
-        public function getIdUtilisateur() {
+        public function getIdUtilisateur(array $data) {
             try {
-                $sql = "SELECT idUtilisateur FROM utilisateur ORDER BY idUtilisateur DESC LIMIT 1;";
+                $sql = "SELECT idUtilisateur FROM utilisateur WHERE nom = :nom AND prenom = :prenom AND telephone = :telephone AND courriel = :courriel";
                 $rqt = $this->cnx->prepare($sql);
+                $rqt->bindValue(":nom", $data[0]);
+                $rqt->bindValue(":prenom", $data[1]);
+                $rqt->bindValue(":telephone", $data[2]);
+                $rqt->bindValue(":courriel", $data[3]);
                 $rqt->execute();
-                $id = $rqt->fetch(PDO::FETCH_ASSOC);
+                $idUser = $rqt->fetch();
                 $rqt->closeCursor();
-                return $id['idUtilisateur'];
+                return $idUser;
             } catch (\Exception $exception) {
                 echo $exception->getMessage();
             }

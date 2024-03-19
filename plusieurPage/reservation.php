@@ -15,16 +15,16 @@
 <main>
     <div class="reservation">
         <div class="reservation-box">
-            <form action="traitement_reservation.php" method="POST">
+            <form action="recapitulatif.php" method="POST">
 
                 <div class="user">
-                    <div class="Fname">
-                        <label for="Fname">Prenom*</label>
-                        <input type="text" name="Fname" id="Fname" required>
+                    <div class="prenom">
+                        <label for="prenom">Prenom*</label>
+                        <input type="text" name="prenom" id="prenom" required>
                     </div>
-                    <div class="Lname">
-                        <label for="Lname">Nom*</label>
-                        <input type="text" name="Lname" id="Lname" required>
+                    <div class="nom">
+                        <label for="nom">Nom*</label>
+                        <input type="text" name="nom" id="nom" required>
                     </div>
                     <div class="phone">
                         <label for="phone">N° de telephone*</label>

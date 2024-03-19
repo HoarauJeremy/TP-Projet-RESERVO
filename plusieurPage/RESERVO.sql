@@ -10,7 +10,9 @@ CREATE TABLE utilisateur(
     prenom VARCHAR(255) NOT NULL,
     telephone CHAR(10) NOT NULL,
     courriel VARCHAR(255) NOT NULL,
-    PRIMARY KEY(idUtilisateur)
+    PRIMARY KEY(idUtilisateur),
+    UNIQUE(courriel),
+    UNIQUE(telephone)
 ) ENGINE=InnoDB DEFAULT CHARSET='utf8';
 
 CREATE TABLE reservation(
