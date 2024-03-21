@@ -68,22 +68,29 @@ if (isset($_POST['submit'])) {
         isset($_POST['service-NeR']) ? $_POST['service-NeR'] : null,
     ];
 
-    if ($cnx->getIdUtilisateur($user) == null) {
-        $cnx->insertUtilisateur($user);
+    var_dump($_POST);
+
+    if ($cnx->checkEmailOrPhone($user) == 0) {
+        if ($cnx->getIdUtilisateur($user) == null) {
+            // $cnx->insertUtilisateur($user);
+            echo 'insertion';
+        }
+            
+        $reservation = [
+            $_POST['date'],
+            $_POST['time-start'],
+            $_POST['time-end'],
+            $prixTotal,
+            $cnx->getIdUtilisateur($user)['idUtilisateur'],
+        ];
+        
+        
+        // $cnx->insertReservation($reservation);
+        // $cnx->insertSalleReservee($salle);
+        // $cnx->insertEquipementReservee($equipement);
+        // $cnx->insertServiceReservee($service);
+    } else {
+        header('Location: reservation.php?msg=Email ou N° de telephone déjà enregistrer');
     }
-
-    $reservation = [
-        $_POST['date'],
-        $_POST['time-start'],
-        $_POST['time-end'],
-        $prixTotal,
-        $cnx->getIdUtilisateur($user)['idUtilisateur'],
-    ];
-
-    $cnx->insertReservation($reservation);
-    $cnx->insertSalleReservee($salle);
-    $cnx->insertEquipementReservee($equipement);
-    $cnx->insertServiceReservee($service);
-
-    header('Location: recap.php?utilisateur='.$cnx->getIdUtilisateur($user)['idUtilisateur']);
+    
 }

@@ -16,10 +16,6 @@ salle_reservee = (#idReservation, #idSalle);
 equipement_reservee = (#idReservation, #idEquipement);
 
 service_reservee = (#idReservation, #idService);
-```
-
-## TODO
-
-- [ ] Faire une page facture
+``` 
 
 ![schemaBDD](./schemaBDD.png "schemaBD").

@@ -234,6 +234,10 @@ input[type=radio], input[type=checkbox], label, button {
     margin: 0 auto;
 }
 
+.msg {
+    color: red;
+}
+
 @media screen and (min-width: 680px) {
 
     footer {

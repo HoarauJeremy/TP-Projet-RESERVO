@@ -12,13 +12,12 @@
 
         public function __construct() {
             $this->host   = "localhost";     // Hôte de la base de donnée
-            $this->port   = 3306;                                           // Port
-            $this->dbname = "reservo";                       // Nom de la BD            
-            $this->user   = 'jeremy';                                          // Utilisateur
-            $this->passwd = "jeremy";
-            $this->sgbd   = "mysql";                                        // Server de Gestion de Base de donnée
-
-            $this->cnx = null;                                              // Initialisation de la connexion à NULL
+            $this->port   = 3306;            // Port
+            $this->dbname = "reservo";       // Nom de la BD            
+            $this->user   = 'jeremy';        // Utilisateur
+            $this->passwd = "jeremy";        
+            $this->sgbd   = "mysql";         // Server de Gestion de Base de donnée
+            $this->cnx = null;               // Initialisation de la connexion à NULL
 
             $this->getConnection(); 
         }
@@ -137,10 +136,8 @@
 
         public function getIdUtilisateur(array $data) {
             try {
-                $sql = "SELECT idUtilisateur FROM utilisateur WHERE nom = :nom AND prenom = :prenom AND telephone = :telephone AND courriel = :courriel";
+                $sql = "SELECT idUtilisateur FROM utilisateur WHERE telephone = :telephone AND courriel = :courriel";
                 $rqt = $this->cnx->prepare($sql);
-                $rqt->bindValue(":nom", $data[0]);
-                $rqt->bindValue(":prenom", $data[1]);
                 $rqt->bindValue(":telephone", $data[2]);
                 $rqt->bindValue(":courriel", $data[3]);
                 $rqt->execute();
@@ -155,10 +152,11 @@
         /**
          * Methode pour récupérée l'ID de la derniere Reservation
          */
-        private function getIdReservation() {
+        public function getIdReservation($idUtilisateur) {
             try {
-                $sql = "SELECT idReservation FROM reservation ORDER BY idReservation DESC LIMIT 1;";
+                $sql = "SELECT idReservation FROM reservation r INNER JOIN utilisateur u ON r.`idUtilisateur` = u.`idUtilisateur` WHERE u.`idUtilisateur` = :idUtilisateur ORDER BY idReservation DESC LIMIT 1;";
                 $rqt = $this->cnx->prepare($sql);
+                $rqt->bindParam(":idutilisateur", $idUtilisateur);
                 $rqt->execute();
                 $id = $rqt->fetch(PDO::FETCH_ASSOC);
                 $rqt->closeCursor();
@@ -168,6 +166,22 @@
             }
         }
 
+        public function checkEmailOrPhone(array $data) {
+            try {
+                $sql = "SELECT COUNT(*) FROM utilisateur WHERE telephone = :telephone OR courriel = :courriel";
+                $rqt = $this->cnx->prepare($sql);
+                $rqt->bindValue(":telephone", $data[2]);
+                $rqt->bindValue(":courriel", $data[3]);
+                $rqt->execute();
+                $idUser = $rqt->fetch();
+                $rqt->closeCursor();
+                return $idUser[0];
+            } catch (\Exception $exception) {
+                echo $exception->getMessage();
+            }
+        }
+
+        /* 
         public function getReservationUtilisateur($id) {
             try {
                 $sql = "SELECT * FROM utilisateur u INNER JOIN reservation r ON u.`idUtilisateur` = r.`idUtilisateur` WHERE u.`idUtilisateur` = :id;";
@@ -231,11 +245,12 @@
             } catch (\Exception $exception) {
                 echo $exception->getMessage();
             }
-        }
+        } */
         
         /**
          * Function pour fermer la connexion avec la base de donnée.
          */
+        
         public function fermerConnexion() 
         {
             $this->cnx = null;

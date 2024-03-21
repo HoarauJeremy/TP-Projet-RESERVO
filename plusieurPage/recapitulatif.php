@@ -31,21 +31,16 @@ if (isset($_POST['submit'])) {
 
     $prixTotal = $prixSalle + $prixEquipement + $prixService;
 
-    $user = [
-        $_POST['nom'],
-        $_POST['prenom'],
-        $_POST['phone'],
-        $_POST['mail'],
-    ];
+    
 
     /* Tableau qui recupere les id des salle */
     $salle = [
-        isset($_POST['preau']) ? $_POST['preau'] : null,
-        isset($_POST['terrain']) ? $_POST['terrain'] : null,
-        isset($_POST['salle1']) ? $_POST['salle1'] : null,
-        isset($_POST['salle2']) ? $_POST['salle2'] : null,
-        isset($_POST['centreCulturel1']) ? $_POST['centreCulturel1'] : null,
-        isset($_POST['centreCulturel2']) ? $_POST['centreCulturel2'] : null,
+        "Preau" => isset($_POST['preau']) ? $_POST['preau'] : null,
+        "Terrain" => isset($_POST['terrain']) ? $_POST['terrain'] : null,
+        "Salle 1" => isset($_POST['salle1']) ? $_POST['salle1'] : null,
+        "Salle 2" => isset($_POST['salle2']) ? $_POST['salle2'] : null,
+        "Centre Culturel 1" => isset($_POST['centreCulturel1']) ? $_POST['centreCulturel1'] : null,
+        "Centre Culturel 2" => isset($_POST['centreCulturel2']) ? $_POST['centreCulturel2'] : null,
     ];
     
     /* Tableau qui recupere les id des equipement et la quantité */
@@ -58,17 +53,19 @@ if (isset($_POST['submit'])) {
         (isset($_POST['chapiteau3-6'])) ? $_POST['chapiteau3-6'] : null => $_POST['nbChapiteau3-6'],
     ];
 
-    /* Tableau qui recupere les id des services */
-    $service = [
-        isset($_POST['service-MeP']) ? $_POST['service-MeP'] : null,
-        isset($_POST['service-NeR']) ? $_POST['service-NeR'] : null,
+    $equipementNom = [
+        'Table',
+        'Chaise',
+        'Matériel de sonorisation',
+        'Chapiteau 3x3m',
+        'Chapiteau 3x4m',
+        'Chapiteau 3x6m',
     ];
 
-    $reservation = [
-        $_POST['date'],
-        $_POST['time-start'],
-        $_POST['time-end'],
-        $prixTotal
+    /* Tableau qui recupere les id des services */
+    $service = [
+        "Mise en place" => isset($_POST['service-MeP']) ? $_POST['service-MeP'] : null,
+        "Nettoyage et Rangement" => isset($_POST['service-NeR']) ? $_POST['service-NeR'] : null,
     ];
 
 }
@@ -95,33 +92,33 @@ if (isset($_POST['submit'])) {
             <h2>Récapitulatif de la réservation</h2>
         </div>
         <div>
-            <?php var_dump($salle); ?>
-
+            <div class="">
+                <h3><?= $_POST['nom'] ." ". $_POST['prenom']; ?></h3>
+                <span>
+                    Telephone: <?= $_POST['phone']; ?>
+                </span>
+                <br>
+                <span>
+                    Courriel: <?= $_POST['mail']; ?>
+                </span>
                 <div class="">
-                    <h3><?= $user[0] ." ". $user[1]; ?></h3>
                     <span>
-                        Telephone: <?= $user[2]; ?>
+                        <?php
+                            echo "Reservation du : " . date_create($_POST["date"])->format("d/m/Y") ." de ".
+                            date_create($_POST["time-start"])->format('H\hm') . " à " .
+                            date_create($_POST["time-end"])->format('H\hm');
+                        ?>
                     </span>
-                    <br>
-                    <span>
-                        Courriel: <?= $user[3]; ?>
-                    </span>
-                    <div class="">
-                        <span>
-                            <?php
-                                echo "Reservation du : " . date_create($key['dateReservation'])->format("d/m/Y") ." de ".
-                                date_create($key['heureDebutReservation'])->format('H\hm') . " à " .
-                                date_create($key['heureFinReservation'])->format('H\hm');
-                            ?>
-                        </span>
-                    </div>
                 </div>
+            </div>
     
             <div>
                 <h3>Salle reservée:</h3> 
                 <ul>
-                    <?php foreach ($reservationSalle as $key => $value) : ?>
-                        <li><?= $value['salle'] ?></li>
+                    <?php foreach ($salle as $key => $value) : ?>
+                        <?php if ($value != null) : ?>
+                            <li><?= $key ?></li>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -129,8 +126,10 @@ if (isset($_POST['submit'])) {
             <div>
                 <h3>Equipement reservée:</h3> 
                 <ul>
-                    <?php foreach ($reservationEquipement as $key => $value) : ?>
-                        <li><?= $value['equipement'] ." x". $value['quantite']; ?></li>
+                    <?php foreach ($equipement as $key => $value) : ?>
+                        <?php if ($key != null) : ?>
+                            <li><?= $equipementNom[$key] ." x". $value; ?></li>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -138,21 +137,62 @@ if (isset($_POST['submit'])) {
             <div>
                 <h3>Service reservée:</h3> 
                 <ul>
-                    <?php foreach ($reservationService as $key => $value) : ?>
-                        <li><?= $value['service']; ?></li>
+                    <?php foreach ($service as $key => $value) : ?>
+                        <li><?= $key; ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
 
             <div class="">
-                <?php //foreach ($reservationUtilisateur as $key => $value) : ?>
-                    <h3>Prix Total : <?php // $value['prixTotal']; ?> €</h3>
-                <?php //endforeach; ?>
+                <h3>Prix Total : <?= $prixTotal ?> €</h3>
             </div>
 
             
-            <form action="traitment_reservation.php" method="post">
+            <form action="traitement_reservation.php" method="post">
+                <input hidden type="text" name="nom" id="nom" value="<?=$_POST['nom']?>" required>
+                <input hidden type="text" name="prenom" id="prenom" value="<?=$_POST['prenom']?>" required>
+                <input hidden type="tel" name="phone" id="phone" value="<?=$_POST['phone']?>" required>
+                <input hidden type="email" name="mail" id="mail" value="<?=$_POST['mail']?>" required>
+
+                <input hidden type="date" name="date" id="date" value="<?= $_POST["date"];?>" required>
+                <input hidden type="time" name="time-start" id="time-start" value="<?= $_POST["time-start"];?>" required>
+                <input hidden type="time" name="time-end" id="time-end" value="<?= $_POST["time-end"];?>" required>
+
+                <!-- ---------------------------------------------------------------------Salle--------------------------------------------------------------------- -->
+                <input hidden type="text" name="preau" id="preau" value="<?= isset($_POST['preau']) ? $_POST['preau'] : null ?>">
+                <input hidden type="text" name="terrain" id="terrain" value="<?= isset($_POST['terrain']) ? $_POST['terrain'] : null ?>">
+                <input hidden type="text" name="salle1" id="salle1" value="<?= isset($_POST['salle1']) ? $_POST['salle1'] : null ?>">
+                <input hidden type="text" name="salle2" id="salle2" value="<?= isset($_POST['salle2']) ? $_POST['salle2'] : null ?>">
+                <input hidden type="text" name="centreCulturel1" id="centreCulturel1" value="<?= isset($_POST['centreCulturel1']) ? $_POST['centreCulturel1'] : null ?>">
+                <input hidden type="text" name="centreCulturel2" id="centreCulturel2" value="<?= isset($_POST['centreCulturel2']) ? $_POST['centreCulturel2'] : null ?>">
+                <!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+                <!-- ------------------------------------------------Equipement------------------------------------------------ -->
+                <input hidden type="text" name="table" id="table" value="<?= (isset($_POST['table'])) ? $_POST['table'] : null ?>">
+                <input hidden type="number" name="nbTable" id="nbTable" min="0" value="<?= $_POST['nbTable'] ?>">
+                <!-- -- -->
+                <input hidden type="text" name="chaise" id="chaise" value="<?= (isset($_POST['chaise'])) ? $_POST['chaise'] : null ?>">
+                <input hidden type="number" name="nbChaise" id="nbChaise" min="0" value="<?= $_POST['nbChaise'] ?>">
+                <!-- -- -->
+                <input hidden type="text" name="sono" id="sono" value="<?= (isset($_POST['sono'])) ? $_POST['sono'] : null ?>">
+                <input hidden type="number" name="nbSono" id="nbSono" min="0" value="<?= $_POST['nbSono'] ?>">
+                <!-- -- -->
+                <input hidden type="text" name="chapiteau3-3" id="chapiteau3-3" value="<?= (isset($_POST['chapiteau3-3']) ) ? $_POST['chapiteau3-3'] : null ?>">
+                <input hidden type="number" name="nbChapiteau3-3" id="nbChapiteau3-3" min="0" value="<?= $_POST['nbChapiteau3-3'] ?>">
+                <!-- -- -->
+                <input hidden type="text" name="chapiteau3-4" id="chapiteau3-4" value="<?= (isset($_POST['chapiteau3-4'])) ? $_POST['chapiteau3-4'] : null ?>">
+                <input hidden type="number" name="nbChapiteau3-4" id="nbChapiteau3-4" min="0" value="<?= $_POST['nbChapiteau3-4'] ?>">
+                <!-- -- -->
+                <input hidden type="text" name="chapiteau3-6" id="chapiteau3-6" value="<?= (isset($_POST['chapiteau3-6'])) ? $_POST['chapiteau3-6'] : null ?>">
+                <input hidden type="number" name="nbChapiteau3-6" id="nbChapiteau3-6" min="0" value="<?= $_POST['nbChapiteau3-6'] ?>">
+                <!-- -------------------------------------------------------------------------------------------------------- -->
+
+                <!-- -------------------------------------------------------------Service------------------------------------------------------------- -->
+                <input hidden type="text" name="service-MeP" id="service-MeP" value="<?= isset($_POST['service-MeP']) ? $_POST['service-MeP'] : null ?>">
+                <input hidden type="text" name="service-NeR" id="service-NeR" value="<?= isset($_POST['service-NeR']) ? $_POST['service-NeR'] : null ?>">
+                <!-- -------------------------------------------------------------------------------------------------------------------------- -->
                 
+                <input type="submit" name="submit" id="submit" value="Réserver">
             </form>
 
         </div>

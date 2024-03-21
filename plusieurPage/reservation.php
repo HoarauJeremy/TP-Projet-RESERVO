@@ -15,24 +15,25 @@
 <main>
     <div class="reservation">
         <div class="reservation-box">
+            <span class="msg"><?= isset($_GET['msg']) ? $_GET['msg'] : ""; ?></span>
             <form action="recapitulatif.php" method="POST">
 
                 <div class="user">
                     <div class="prenom">
                         <label for="prenom">Prenom*</label>
-                        <input type="text" name="prenom" id="prenom" required>
+                        <input type="text" name="prenom" id="prenom" pattern="/[$A-Za-zéèà-]/g" required>
                     </div>
                     <div class="nom">
                         <label for="nom">Nom*</label>
-                        <input type="text" name="nom" id="nom" required>
+                        <input type="text" name="nom" id="nom" pattern="/[$A-Za-zéèà-]/g" required>
                     </div>
                     <div class="phone">
                         <label for="phone">N° de telephone*</label>
-                        <input type="tel" name="phone" id="phone" required>
+                        <input type="tel" pattern="([0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2})|([0-9]{10})|([0-9]{2} [0-9]{2} [0-9]{6})|([0-9]{2} [0-9]{2} [0-9]{3} [0-9]{3})" name="phone" id="phone" required>
                     </div>
                     <div class="mail">
                         <label for="mail">Courriel*</label>
-                        <input type="email" name="mail" id="mail" required>
+                        <input type="email" name="mail" id="mail" pattern="/^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$/g" required>
                     </div>
                     <div class="date">
                         <label for="date">Date*</label>
