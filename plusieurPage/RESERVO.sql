@@ -8,7 +8,7 @@ CREATE TABLE utilisateur(
     idUtilisateur INT AUTO_INCREMENT,
     nom VARCHAR(50) NOT NULL,
     prenom VARCHAR(255) NOT NULL,
-    telephone CHAR(10) NOT NULL,
+    telephone VARCHAR(15) NOT NULL,
     courriel VARCHAR(255) NOT NULL,
     PRIMARY KEY(idUtilisateur),
     UNIQUE(courriel),
