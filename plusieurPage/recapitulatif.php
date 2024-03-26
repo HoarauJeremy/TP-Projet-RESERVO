@@ -45,12 +45,12 @@ if (isset($_POST['submit'])) {
     
     /* Tableau qui recupere les id des equipement et la quantité */
     $equipement = [
-        (isset($_POST['table'])) ? $_POST['table'] : null => $_POST['nbTable'],
-        (isset($_POST['chaise'])) ? $_POST['chaise'] : null => $_POST['nbChaise'],
-        (isset($_POST['sono'])) ? $_POST['sono'] : null => $_POST['nbSono'],
-        (isset($_POST['chapiteau3-3']) ) ? $_POST['chapiteau3-3'] : null => $_POST['nbChapiteau3-3'],
-        (isset($_POST['chapiteau3-4'])) ? $_POST['chapiteau3-4'] : null => $_POST['nbChapiteau3-4'],
-        (isset($_POST['chapiteau3-6'])) ? $_POST['chapiteau3-6'] : null => $_POST['nbChapiteau3-6'],
+        (isset($_POST['table'])) ? $_POST['table'] : null => isset($_POST['nbTable']) ? $_POST['nbTable']: null,
+        (isset($_POST['chaise'])) ? $_POST['chaise'] : null => isset($_POST['nbChaise']) ? $_POST['nbChaise'] : null,
+        (isset($_POST['sono'])) ? $_POST['sono'] : null => isset($_POST['nbSono']) ? $_POST['nbSono'] : null,
+        (isset($_POST['chapiteau3-3']) ) ? $_POST['chapiteau3-3'] : null => isset($_POST['nbChapiteau3-3']) ? $_POST['nbChapiteau3-3'] : null,
+        (isset($_POST['chapiteau3-4'])) ? $_POST['chapiteau3-4'] : null => isset($_POST['nbChapiteau3-4']) ? $_POST['nbChapiteau3-4'] : null,
+        (isset($_POST['chapiteau3-6'])) ? $_POST['chapiteau3-6'] : null => isset($_POST['nbChapiteau3-6']) ? $_POST['nbChapiteau3-6'] : null,
     ];
 
     $equipementNom = [
@@ -68,6 +68,7 @@ if (isset($_POST['submit'])) {
         "Nettoyage et Rangement" => isset($_POST['service-NeR']) ? $_POST['service-NeR'] : null,
     ];
 
+    var_dump($_POST);
 }
 
 ?>
@@ -128,7 +129,7 @@ if (isset($_POST['submit'])) {
                 <ul>
                     <?php foreach ($equipement as $key => $value) : ?>
                         <?php if ($key != null) : ?>
-                            <li><?= $equipementNom[$key] ." x". $value; ?></li>
+                            <li><?= $equipementNom[$key-1] ." x". $value; ?></li>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </ul>
@@ -169,22 +170,22 @@ if (isset($_POST['submit'])) {
 
                 <!-- ------------------------------------------------Equipement------------------------------------------------ -->
                 <input hidden type="text" name="table" id="table" value="<?= (isset($_POST['table'])) ? $_POST['table'] : null ?>">
-                <input hidden type="number" name="nbTable" id="nbTable" min="0" value="<?= $_POST['nbTable'] ?>">
+                <input hidden type="number" name="nbTable" id="nbTable" min="0" value="<?= isset($_POST['nbTable']) ? $_POST['nbTable'] : 0 ?>">
                 <!-- -- -->
                 <input hidden type="text" name="chaise" id="chaise" value="<?= (isset($_POST['chaise'])) ? $_POST['chaise'] : null ?>">
-                <input hidden type="number" name="nbChaise" id="nbChaise" min="0" value="<?= $_POST['nbChaise'] ?>">
+                <input hidden type="number" name="nbChaise" id="nbChaise" min="0" value="<?= isset($_POST['nbChaise']) ? $_POST['nbChaise'] : 0 ?>">
                 <!-- -- -->
                 <input hidden type="text" name="sono" id="sono" value="<?= (isset($_POST['sono'])) ? $_POST['sono'] : null ?>">
-                <input hidden type="number" name="nbSono" id="nbSono" min="0" value="<?= $_POST['nbSono'] ?>">
+                <input hidden type="number" name="nbSono" id="nbSono" min="0" value="<?= isset($_POST['nbSono']) ? $_POST['nbSono'] : 0 ?>">
                 <!-- -- -->
                 <input hidden type="text" name="chapiteau3-3" id="chapiteau3-3" value="<?= (isset($_POST['chapiteau3-3']) ) ? $_POST['chapiteau3-3'] : null ?>">
-                <input hidden type="number" name="nbChapiteau3-3" id="nbChapiteau3-3" min="0" value="<?= $_POST['nbChapiteau3-3'] ?>">
+                <input hidden type="number" name="nbChapiteau3-3" id="nbChapiteau3-3" min="0" value="<?= isset($_POST['nbChapiteau3-3']) ? $_POST['nbChapiteau3-3'] : 0 ?>">
                 <!-- -- -->
                 <input hidden type="text" name="chapiteau3-4" id="chapiteau3-4" value="<?= (isset($_POST['chapiteau3-4'])) ? $_POST['chapiteau3-4'] : null ?>">
-                <input hidden type="number" name="nbChapiteau3-4" id="nbChapiteau3-4" min="0" value="<?= $_POST['nbChapiteau3-4'] ?>">
+                <input hidden type="number" name="nbChapiteau3-4" id="nbChapiteau3-4" min="0" value="<?= isset($_POST['nbChapiteau3-4']) ? $_POST['nbChapiteau3-4'] : 0 ?>">
                 <!-- -- -->
                 <input hidden type="text" name="chapiteau3-6" id="chapiteau3-6" value="<?= (isset($_POST['chapiteau3-6'])) ? $_POST['chapiteau3-6'] : null ?>">
-                <input hidden type="number" name="nbChapiteau3-6" id="nbChapiteau3-6" min="0" value="<?= $_POST['nbChapiteau3-6'] ?>">
+                <input hidden type="number" name="nbChapiteau3-6" id="nbChapiteau3-6" min="0" value="<?= isset($_POST['nbChapiteau3-6']) ? $_POST['nbChapiteau3-6'] : 0 ?>">
                 <!-- -------------------------------------------------------------------------------------------------------- -->
 
                 <!-- -------------------------------------------------------------Service------------------------------------------------------------- -->

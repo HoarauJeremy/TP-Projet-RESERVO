@@ -74,14 +74,14 @@
             }
         }
 
-        public function insertSalleReservee(array $data) {
+        public function insertSalleReservee(array $data, $id) {
             try {
                 $sql = 'INSERT INTO salle_reservee (idReservation, idSalle) VALUES (:idReservation, :idSalle);';
                 $rqt = $this->cnx->prepare($sql);
                 
                 foreach ($data as $salle) {
                     if ($salle) {
-                        $rqt->bindValue(':idReservation', $this->getIdReservation(), PDO::PARAM_INT);
+                        $rqt->bindValue(':idReservation', $this->getIdReservation($id), PDO::PARAM_INT);
                         $rqt->bindValue(':idSalle', $salle, PDO::PARAM_INT);
                         $rqt->execute();
                         $rqt->closeCursor();
@@ -93,14 +93,14 @@
             }
         }
 
-        public function insertEquipementReservee(array $data) {            
+        public function insertEquipementReservee(array $data, $id) {            
             try {
                 $sql = 'INSERT INTO equipement_reservee (idReservation, idEquipement, quantite) VALUES (:idReservation, :idEquipement, :quantite);';
                 $rqt = $this->cnx->prepare($sql);
 
                 foreach ($data as $equipement => $quantite) {
                     if ($equipement && $quantite) {                        
-                        $rqt->bindValue(':idReservation', $this->getIdReservation(), PDO::PARAM_INT);
+                        $rqt->bindValue(':idReservation', $this->getIdReservation($id), PDO::PARAM_INT);
                         $rqt->bindValue(':idEquipement', $equipement, PDO::PARAM_INT);
                         $rqt->bindValue(':quantite', $quantite, PDO::PARAM_INT);
                         $rqt->execute();
@@ -114,14 +114,14 @@
             }
         }
 
-        public function insertServiceReservee(array $data) {
+        public function insertServiceReservee(array $data, $id) {
             try {
                 $sql = 'INSERT INTO service_reservee (idReservation, idService) VALUES (:idReservation, :idService);';
                 $rqt = $this->cnx->prepare($sql);
                 
                 foreach ($data as $service) {
                     if ($service) {        
-                        $rqt->bindValue(':idReservation', $this->getIdReservation(), PDO::PARAM_INT);
+                        $rqt->bindValue(':idReservation', $this->getIdReservation($id), PDO::PARAM_INT);
                         $rqt->bindValue(':idService', $service, PDO::PARAM_INT);
                         $rqt->execute();
                         $rqt->closeCursor();
@@ -143,7 +143,7 @@
                 $rqt->execute();
                 $idUser = $rqt->fetch();
                 $rqt->closeCursor();
-                return $idUser;
+                return $idUser['idUtilisateur'];
             } catch (\Exception $exception) {
                 echo $exception->getMessage();
             }
@@ -156,7 +156,7 @@
             try {
                 $sql = "SELECT idReservation FROM reservation r INNER JOIN utilisateur u ON r.`idUtilisateur` = u.`idUtilisateur` WHERE u.`idUtilisateur` = :idUtilisateur ORDER BY idReservation DESC LIMIT 1;";
                 $rqt = $this->cnx->prepare($sql);
-                $rqt->bindParam(":idutilisateur", $idUtilisateur);
+                $rqt->bindValue(":idUtilisateur", $idUtilisateur);
                 $rqt->execute();
                 $id = $rqt->fetch(PDO::FETCH_ASSOC);
                 $rqt->closeCursor();

@@ -14,19 +14,20 @@
 
 <main>
     <div class="presentation">
-
-        <h2>Nos offres de réservation :</h2>
-
-        <div class="pres-text">
-            <p>
-                Découvrez nos offres de réservation flexibles et adaptées à vos besoins au sein de l'Association AJS (Jeunesse Solidaire).
-                <br>
-                Que vous planifiez un événement personnel ou une réunion d'envergure, nous vous offrons un choix varié de salles de qualité.
-                <br>
-                De plus, notre gamme d'équipements et de services vous permet de personnaliser votre réservation selon vos préférences.
-                <br>
-                Faites confiance à notre équipe pour répondre à vos besoins en matière de réservation et rendre votre événement inoubliable
-            </p>
+        <span class="msg"><?= isset($_GET['msg']) ? $_GET['msg'] : ""; ?></span>
+        <div>
+            <h2>Nos offres de réservation :</h2>
+            <div class="pres-text">
+                <p>
+                    Découvrez nos offres de réservation flexibles et adaptées à vos besoins au sein de l'Association AJS (Jeunesse Solidaire).
+                    <br>
+                    Que vous planifiez un événement personnel ou une réunion d'envergure, nous vous offrons un choix varié de salles de qualité.
+                    <br>
+                    De plus, notre gamme d'équipements et de services vous permet de personnaliser votre réservation selon vos préférences.
+                    <br>
+                    Faites confiance à notre équipe pour répondre à vos besoins en matière de réservation et rendre votre événement inoubliable
+                </p>
+            </div>
         </div>
 
         <div class="pres-box">
