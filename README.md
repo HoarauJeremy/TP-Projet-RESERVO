@@ -1,7 +1,7 @@
 # TP-Projet-RESERVO
 
 ```SQL
-utilisateur = (idUtilisateur INT, nom VARCHAR(50), prenom VARCHAR(255), telephone CHAR(10), courriel VARCHAR(255));
+utilisateur = (idUtilisateur INT, nom VARCHAR(50), prenom VARCHAR(255), telephone VARCHAR(15), courriel VARCHAR(255));
 
 reservation = (idReservation INT, dateReservation DATE, heureDebutReservation TIME, heureFinReservation TIME, prixTotal INT, #idUtilisateur);
 
