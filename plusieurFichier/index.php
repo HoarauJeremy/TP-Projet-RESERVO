@@ -14,7 +14,7 @@ spl_autoload_register(function ($class) {
 $url = isset($_GET['url']) ? $_GET['url'] : 'Home';
 $urlParts = explode('/', $url);
 
-$controllerName = 'Controllers\\'.$urlParts[0].'Controller';
+$controllerName = 'Controllers\\'.ucfirst($urlParts[0]).'Controller';
 $action = isset($urlParts[1]) ? $urlParts[1] : 'index';
 
 $val = array_slice($urlParts, 2);

@@ -48,7 +48,7 @@ class Reservation extends Model
         }
     }
 
-    public function insertEquipementReservee(array $data, $id) {            
+    public function insertEquipementReservee(array $data, $id) {
         try {
             $sql = 'INSERT INTO equipement_reservee (idReservation, idEquipement, quantite) VALUES (:idReservation, :idEquipement, :quantite);';
             $rqt = $this->cnx->prepare($sql);
@@ -89,10 +89,10 @@ class Reservation extends Model
         }
     }
 
-        /**
-         * Methode pour récupérée l'ID de la derniere Reservation
-         */
-        public function getIdReservation($idUtilisateur) {
+    /**
+     * Methode pour récupérée l'ID de la derniere Reservation
+     */
+    public function getIdReservation($idUtilisateur) {
             try {
                 $sql = "SELECT idReservation FROM reservation r INNER JOIN utilisateur u ON r.`idUtilisateur` = u.`idUtilisateur` WHERE u.`idUtilisateur` = :idUtilisateur ORDER BY idReservation DESC LIMIT 1;";
                 $rqt = $this->cnx->prepare($sql);
@@ -104,6 +104,18 @@ class Reservation extends Model
             } catch (\Exception $exception) {
                 echo $exception->getMessage();
             }
+    }
+
+    public function deleteReservation($idReservation) {
+        try {
+            $sql = "DELETE FROM reservation WHERE idReservation = :idReservation";
+            $rqt = $this->cnx->prepare($sql);
+            $rqt->bindValue(":idReservation", $idReservation);
+            $rqt->execute();
+            $rqt->closeCursor();
+        } catch (\PDOException $pDOException) {
+            echo $pDOException->getMessage();
         }
+    }
 
 }

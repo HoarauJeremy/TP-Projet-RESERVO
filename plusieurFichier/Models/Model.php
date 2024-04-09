@@ -15,7 +15,7 @@ class Model
     protected $cnx;
 
     public function __construct(){
-        $this->host   = "locahost";     // Hôte de la base de donnée
+        $this->host   = "localhost";     // Hôte de la base de donnée
         $this->port   = 3306;           // Port
         $this->dbname = "reservo";      // Nom de la BD            
         $this->user   = "jeremy";       // Utilisateur

@@ -4,8 +4,12 @@
     // require_once 'Controller.php';
     // use Controllers\Controller;
 
-    class HomeController extends Controller
+    class HomeController
     {
+        public function view($url) {
+            return "View/".$url.".php";
+        }
+
         public function index() {
             $path = $this->view('Home');
 
