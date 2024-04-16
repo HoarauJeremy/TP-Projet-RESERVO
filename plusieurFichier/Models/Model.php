@@ -17,7 +17,7 @@ class Model
     public function __construct(){
         $this->host   = "localhost";     // Hôte de la base de donnée
         $this->port   = 3306;           // Port
-        $this->dbname = "reservo";      // Nom de la BD            
+        $this->dbname = "reservo-e3";      // Nom de la BD            
         $this->user   = "jeremy";       // Utilisateur
         $this->passwd = "jeremy";
         $this->sgbd   = "mysql";        // Server de Gestion de Base de donnée

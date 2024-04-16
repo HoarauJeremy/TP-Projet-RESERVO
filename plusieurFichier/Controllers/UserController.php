@@ -34,6 +34,10 @@ class UserController
             include $this->view('Error');
         }
     }
+    
+    public function connecter() {
+        $this->utilisateur->connexion();
+    }
 
     public function inscription() {
         $path = $this->view('utilisateur/inscription');
@@ -44,20 +48,22 @@ class UserController
             include $this->view('Error');
         }
     }
-    
+
     public function get() {
     }
     
     public function store() {
         if (isset($_POST['submit'])) {
-            $user = [
-                $_POST['nom'],
-                $_POST['prenom'],
-                $_POST['phone'],
-                $_POST['mail'],
+            $utilisateur = [
+                isset($_POST['prenom']) ? $_POST['prenom'] : null,
+                isset($_POST['nom']) ? $_POST['nom'] : null,
+                isset($_POST['phone']) ? $_POST['phone'] : null,
+                isset($_POST['mail']) ? $_POST['mail'] : null,
+                password_hash($_POST['password'], PASSWORD_DEFAULT),
             ];
             
-            $this->utilisateur->insertUtilisateur($user);
+            $this->utilisateur->insertUtilisateur($utilisateur);
+            file_exists($this->view('utilisateur/connexion')) ? require_once $this->view('utilisateur/connexion') : include $this->view('Error');
         }
     }
 

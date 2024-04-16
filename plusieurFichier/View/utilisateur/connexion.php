@@ -5,13 +5,13 @@ $title = "Connexion";
 $contenu = '
     <div class="connexion">
         <div>
-            <form action="" method="post">
+            <form action="?url=user/connecter" method="post">
                 <div>
-                    <label for="mail">Courriel : </label>
+                    <label for="mail">Courriel : </label>jere@fe.fe
                     <input type="email" name="mail" id="mail">
                 </div>
                 <div>
-                    <label for="password">Mot de passe : </label>
+                    <label for="password">Mot de passe : </label>abcdef
                     <input type="password" name="password" id="password">
                 </div>
 
