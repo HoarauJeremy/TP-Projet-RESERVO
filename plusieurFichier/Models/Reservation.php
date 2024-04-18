@@ -94,7 +94,7 @@ class Reservation extends Model
      */
     public function getIdReservation($idUtilisateur) {
             try {
-                $sql = "SELECT idReservation FROM reservation r INNER JOIN utilisateur u ON r.`idUtilisateur` = u.`idUtilisateur` WHERE u.`idUtilisateur` = :idUtilisateur ORDER BY idReservation DESC LIMIT 1;";
+                $sql = "SELECT idReservation FROM reservation WHERE idUtilisateur = :idUtilisateur ORDER BY idReservation DESC LIMIT 1;";
                 $rqt = $this->cnx->prepare($sql);
                 $rqt->bindValue(":idUtilisateur", $idUtilisateur);
                 $rqt->execute();

@@ -78,13 +78,13 @@ $contenu = '
         </div>
         <div>
             <div class="">
-                <h3>'. $_POST["nom"] ." ". $_POST["prenom"] .'</h3>
+                <h3>'. $_SESSION["nom"] ." ". $_SESSION["prenom"] .'</h3>
                 <span>
-                    Telephone: '. $_POST["phone"] .'
+                    Telephone: '. $_SESSION["phone"] .'
                 </span>
                 <br>
                 <span>
-                    Courriel: '. $_POST["mail"] .'
+                    Courriel: '. $_SESSION["mail"] .'
                 </span>
                 <div class="">
                     <span>
@@ -135,11 +135,7 @@ $contenu = '
             </div>';
 
             $contenu .= "
-                <form action='?url=Reservation/traitement' method='post'>
-                    <input hidden type='text' name='nom' id='nom' value='".$_POST['nom']."' required>
-                    <input hidden type='text' name='prenom' id='prenom' value='".$_POST['prenom']."' required>
-                    <input hidden type='tel' name='phone' id='phone' value='".$_POST['phone']."' required>
-                    <input hidden type='email' name='mail' id='mail' value='".$_POST['mail']."' required>
+                <form action='?url=Reservation/store' method='post'>
 
                     <input hidden type='date' name='date' id='date' value='".$_POST['date']."' required>
                     <input hidden type='time' name='time-start' id='time-start' value='".$_POST['time-start']."' required>

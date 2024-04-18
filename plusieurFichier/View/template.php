@@ -11,14 +11,7 @@
 <header>
     <h1><a href="index.php">RESERVO</a></h1>
 
-    <?php
-        /* if ($_SESSION['']) {
-            echo '<a href="?url=user/deconnexion">Se Deconnecter</a>';
-        } else {
-            echo '<a href="?url=user/connexion">Se Connecter</a>';
-        } */
-        echo '<a href="?url=user/connexion">Se Connecter</a>';
-    ?>
+    <?= (isset($_SESSION['status']) && $_SESSION['status'] == true) ? '<a href="?url=user/deconnexion">Se Deconnecter</a>' : '<a href="?url=user/connexion">Se Connecter</a>'; ?>
 </header>
 
 <main>

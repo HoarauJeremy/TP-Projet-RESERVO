@@ -2,6 +2,8 @@
 
     namespace Controllers;
     use Models\Reservation;
+
+    session_start();
     
     class ReservationController
     {
@@ -18,22 +20,17 @@
 
         public function index() {
             $path = $this->view('reservation/reservation');
-            
-            if (file_exists($path)) {
-                include($path);
+
+            if (isset($_SESSION['status']) && $_SESSION['status'] == true && isset($_SESSION['id'])) {
+                file_exists($path) ? include($path) : include $this->view('Error');
             } else {
-                include $this->view('Error');
+                header("Location: index.php?url=user/connexion&msg=Veuillez vous connecter.");
             }
         }
 
         public function recapitulatif() {
             $path = $this->view('reservation/recapitulatif');
-
-            if (file_exists($path)) {
-                include($path);
-            } else {
-                include $this->view('Error');
-            }
+            file_exists($path) ? include($path) : include $this->view('Error');
         }
 
         public function store() {
@@ -96,19 +93,20 @@
                         isset($_POST['service-NeR']) ? $_POST['service-NeR'] : null,
                     ];
 
+                    $iduser = $_SESSION['id'];
+
                     $reservation = [
                         $_POST['date'],
                         $_POST['time-start'],
                         $_POST['time-end'],
                         $prixTotal,
-                        // $cnx->getIdUtilisateur($user),
-                        // SESSION
+                        $iduser
                     ];
 
                     $this->reservationModel->insertReservation($reservation);
-                    $this->reservationModel->insertSalleReservee($salle, 1/*SESSION*/);
-                    $this->reservationModel->insertEquipementReservee($equipement, 1/*SESSION*/);
-                    $this->reservationModel->insertServiceReservee($service, 1/*SESSION*/);
+                    $this->reservationModel->insertSalleReservee($salle, $this->reservationModel->getIdReservation($iduser));
+                    $this->reservationModel->insertEquipementReservee($equipement, $this->reservationModel->getIdReservation($iduser));
+                    $this->reservationModel->insertServiceReservee($service, $this->reservationModel->getIdReservation($iduser));
 
                     header('Location: index.php?msg=Votre réservation a bien été enregistrée.');
                     exit;
@@ -120,42 +118,30 @@
         }
 
         public function get() {
-            if ($_SESSION['']) {
+            if (isset($_SESSION['status']) && $_SESSION['status'] == true) { //isset($_SESSION[''])
 
                 $path = $this->view('reservation/');
-                
-                if (file_exists($path)) {
-                    include($path);
-                } else {
-                    include $this->view('Error');
-                }
+                file_exists($path) ? include($path) : include $this->view('Error');
             }
         }
 
         public function getAll() {
-            if ($_SESSION['']) {
+            if (isset($_SESSION['status']) && $_SESSION['status'] == true) { //isset($_SESSION[''])
                 
                 $path = $this->view('reservation/');
-                
-                if (file_exists($path)) {
-                    include($path);
-                } else {
-                    include $this->view('Error');
-                }
+                file_exists($path) ? include($path) : include $this->view('Error');
             }
         }
 
         public function update() {
-            if ($_SESSION['']) {
-                
-
+            if (isset($_SESSION['status']) && $_SESSION['status'] == true) { //isset($_SESSION['type'])
                 
             }
         }
 
         public function delete() {
             $idReservation = $this->reservationModel->getIdReservation($_SESSION['']);
-            if ($_SESSION['']) {
+            if (isset($_SESSION['status']) && $_SESSION['status'] == true) { //isset($_SESSION['type'])
                 $this->reservationModel->deleteReservation($idReservation);
             }
         }
