@@ -315,6 +315,109 @@ input[type=radio], input[type=checkbox], label, button {
 
 }
 
+.admin {
+    width: 90%;
+    margin: 0 auto;
+
+    & table {
+        margin: 0 auto;
+    }
+
+    & table tr {
+        text-align: center;
+    }
+
+    & table tr th .id {
+        font-weight: bold;
+    }
+}
+
+.dashBoard {
+    width: 90%;
+    margin: 0 auto;
+
+    & titre {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    & .article, .res {
+        width: 100%;
+        background-color: #cbcbcb;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 5px auto;
+
+        & .salle-info, .equipement-info, .service-info, .res-info {
+            width: 100%;
+            border-radius: 10px;
+            margin: 10px auto;
+            background-color: #f3f4f6;
+
+            & .titre {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 5px 15px;
+            }
+
+            & a {
+                background-color: #126;
+                padding: 4px 12px;
+                color: white;
+                border-radius: 3px;
+                margin: 0 1px;
+                text-decoration: none;
+            }
+
+            & a:hover {
+                background-color: #123;
+            }
+
+            & .liste-salle, .liste-equipement, .liste-service, .liste-res {
+                width: 95%;
+                margin: 5px auto;
+                padding: 5px 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                & .salle-box, .equipement-box, .service-box, .res-box {
+                    width: 95%;
+                    height: auto;
+                    margin: 5px auto;
+                    padding: 5px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #fefefe;
+                    border-radius: 5px;
+                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+                    & .salle-pres, .salle-lien, .equipement-pres, .equipement-lien, .service-pres, .service-lien, .res-pres {
+                        width: 100%;
+                        padding: 5px 10px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+
+                    & .salle-lien, .equipement-lien, .service-lien {
+                        justify-content: right;
+                    }
+                }
+            }
+
+        }
+    }
+
+}
+
 @media screen and (min-width: 680px) {
 
     footer {
@@ -364,4 +467,60 @@ input[type=radio], input[type=checkbox], label, button {
         }
     }
 
+}
+
+@media screen and (min-width: 1125px) {
+    .dashBoard {
+        width: 90%;
+        margin: 0 auto;
+    
+        & .dashboard-panel {
+            width: 100%;
+            display: flex;
+        }
+
+        & .res {
+            width: 30%;
+            height: 750px;
+        }
+        
+        & .article {
+            height: auto;
+            width: 65%;
+            display: flex;
+            flex-wrap: wrap;
+    
+            & .salle-info, .equipement-info, .service-info {
+                width: 45%;
+            }
+        }
+    
+    }
+}
+
+@media screen and (min-width: 1630px) {
+    .dashBoard {
+        width: 90%;
+        margin: 0 auto;
+    
+        & .dashboard-panel {
+            width: 100%;
+            display: flex;
+        }
+
+        & .res {
+            width: 30%;
+            height: 750px;
+        }
+        
+        & .article {
+            width: 65%;
+            display: flex;
+    
+            & .salle-info, .equipement-info, .service-info {
+                width: 30%;
+            }
+        }
+    
+    }
 }
