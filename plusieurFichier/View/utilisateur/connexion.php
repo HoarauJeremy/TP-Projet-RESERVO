@@ -1,12 +1,10 @@
 <?php
 
 $title = "Connexion";
-$msg = isset($_GET['msg']) ? $_GET['msg'] : '';
 
 $contenu = "
     <div class='connexion'>
         <div>
-        <span class='msg'>". $msg ."</span>
             <form action='?url=user/connecter' method='post'>
                 <div>
                     <label for='mail'>Courriel : </label>jere@fe.fe

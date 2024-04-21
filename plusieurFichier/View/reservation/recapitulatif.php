@@ -100,8 +100,8 @@ $contenu = '
             <div>
                 <h3>Salle reservée:</h3> 
                 <ul>';
-                    foreach($salle as $key => $value) {
-                        if ($value != null) {
+                    foreach($salle as $key => $reservation) {
+                        if ($reservation != null) {
                             $contenu .= "<li>$key</li>";
                         }
                     }
@@ -112,9 +112,9 @@ $contenu = '
             <div>
                 <h3>Equipement reservée:</h3> 
                 <ul>';
-                    foreach ($equipement as $key => $value) {
+                    foreach ($equipement as $key => $reservation) {
                         if ($key != null) {
-                            $contenu .= "<li>".$equipementNom[$key-1] ." x". $value."</li>";
+                            $contenu .= "<li>".$equipementNom[$key-1] ." x". $reservation."</li>";
                         }
                     }
             $contenu .= '
@@ -124,7 +124,7 @@ $contenu = '
             <div>
                 <h3>Service reservée:</h3> 
                 <ul>';
-                    foreach ($service as $key => $value) {
+                    foreach ($service as $key => $reservation) {
                         $contenu .= "<li>". $key ."</li>";
                     }
             $contenu .= '</ul>
