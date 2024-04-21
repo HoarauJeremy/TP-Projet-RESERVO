@@ -106,6 +106,19 @@ class Reservation extends Model
             }
     }
 
+    public function getReservations() {
+        try {
+            $sql = "SELECT * FROM reservation ORDER BY idReservation DESC LIMIT 5;";
+            $rqt = $this->cnx->prepare($sql);
+            $rqt->execute();
+            $reservations = $rqt->fetchAll(PDO::FETCH_ASSOC);
+            $rqt->closeCursor();
+            return $reservations;
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+        }
+    }
+
     public function deleteReservation($idReservation) {
         try {
             $sql = "DELETE FROM reservation WHERE idReservation = :idReservation";

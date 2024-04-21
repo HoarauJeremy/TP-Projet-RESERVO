@@ -33,7 +33,7 @@ class Utilisateur extends Model
     }
 
     public function getInformationUtilisateur($email) {
-        $sql = "SELECT nom, prenom, telephone, courriel FROM utilisateur WHERE courriel = :courriel;";
+        $sql = "SELECT nom, prenom, telephone, courriel, typeUtilisateur FROM utilisateur WHERE courriel = :courriel;";
         $rqt = $this->cnx->prepare($sql);
         $rqt->bindParam(':courriel', $email, PDO::PARAM_STR);
         $rqt->execute();
@@ -42,11 +42,6 @@ class Utilisateur extends Model
 
         return $result;
     }
-
-
-    /* public function checkPasswordStrenght($password) : bool {
-        
-    } */
 
     /**
      * Insert un utilisateur dans la base de données.
