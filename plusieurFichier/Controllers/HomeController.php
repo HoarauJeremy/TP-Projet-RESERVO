@@ -1,32 +1,21 @@
 <?php
 
     namespace Controllers;
-    // require_once 'Controller.php';
-    // use Controllers\Controller;
 
-    class HomeController
+    session_start();
+
+    class HomeController extends Controller
     {
-        public function view($url) {
-            return "View/".$url.".php";
-        }
 
         public function index() {
-            $path = $this->view('Home');
-
-            if (file_exists($path)) {
-                include($path);
-            } else {
-                include $this->view('Error');
-            }
+            $this->view('Home');
         }
 
         public function mention() {
-            $path = $this->view("mentionLegale");
-            
-            if (file_exists($path)) {
-                include($path);
-            } else {
-                include $this->view('Error');
-            }
+            $this->view("mentionLegale");
+        }
+
+        public function error() {
+            $this->view("Error");
         }
     }

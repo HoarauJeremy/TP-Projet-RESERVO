@@ -5,7 +5,7 @@ use Models\Utilisateur;
 
 session_start();
 
-class UserController
+class UserController extends Controller
 {
     protected $utilisateur;
 
@@ -13,18 +13,12 @@ class UserController
         $this->utilisateur = new Utilisateur();
     }
 
-    public function view($url) {
-        return "View/".$url.".php";
-    }
-
     public function index() {
-        $path = $this->view('utilisateur/index');
-        file_exists($path) ? include($path) : include $this->view('Error');
+        $this->view('utilisateur/index');
     }
 
     public function connexion() {
-        $path = $this->view('utilisateur/connexion');
-        file_exists($path) ? include($path) : include $this->view('Error');
+        $this->view('utilisateur/connexion');
     }
 
     /**
@@ -48,10 +42,11 @@ class UserController
         if (password_verify($password, $hashedPassword['motDePasse'])) {
             $_SESSION['status'] = true;
             $_SESSION['id'] = $this->utilisateur->getIdUtilisateur($email);
-            $_SESSION['nom'] = isset($userInfo[0]['nom']) ? $userInfo[0]['nom'] : "";
-            $_SESSION['prenom'] = isset($userInfo[0]['prenom']) ? $userInfo[0]['prenom'] : "";
-            $_SESSION['phone'] = isset($userInfo[0]['telephone']) ? $userInfo[0]['telephone'] : "";
-            $_SESSION['mail'] = isset($userInfo[0]['courriel']) ? $userInfo[0]['courriel'] : "";
+            $_SESSION['nom'] = $userInfo[0]['nom'] ?? "";
+            $_SESSION['prenom'] = $userInfo[0]['prenom'] ?? "";
+            $_SESSION['phone'] = $userInfo[0]['telephone'] ?? "";
+            $_SESSION['mail'] = $userInfo[0]['courriel'] ?? "";
+            $_SESSION['type'] = $userInfo[0]['typeUtilisateur'] ?? "";
             header("Location: index.php");
             exit;
         } else {
@@ -61,8 +56,7 @@ class UserController
     }
 
     public function inscription() {
-        $path = $this->view('utilisateur/inscription');
-        file_exists($path) ? include($path) : include $this->view('Error');
+        $this->view('utilisateur/inscription');
     }
 
     public function get() {

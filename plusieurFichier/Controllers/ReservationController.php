@@ -5,7 +5,7 @@
 
     session_start();
     
-    class ReservationController
+    class ReservationController extends Controller
     {
 
         protected $reservationModel;
@@ -14,23 +14,16 @@
             $this->reservationModel = new Reservation();
         }
 
-        public function view($url) {
-            return "View/".$url.".php";
-        }
-
         public function index() {
-            $path = $this->view('reservation/reservation');
-
             if (isset($_SESSION['status']) && $_SESSION['status'] == true && isset($_SESSION['id'])) {
-                file_exists($path) ? include($path) : include $this->view('Error');
+                $this->view('reservation/reservation');
             } else {
                 header("Location: index.php?url=user/connexion&msg=Veuillez vous connecter.");
             }
         }
 
         public function recapitulatif() {
-            $path = $this->view('reservation/recapitulatif');
-            file_exists($path) ? include($path) : include $this->view('Error');
+            $this->view('reservation/recapitulatif');
         }
 
         public function store() {
@@ -120,16 +113,14 @@
         public function get() {
             if (isset($_SESSION['status']) && $_SESSION['status'] == true) { //isset($_SESSION[''])
 
-                $path = $this->view('reservation/');
-                file_exists($path) ? include($path) : include $this->view('Error');
+                $this->view('reservation/');
             }
         }
 
         public function getAll() {
             if (isset($_SESSION['status']) && $_SESSION['status'] == true) { //isset($_SESSION[''])
                 
-                $path = $this->view('reservation/');
-                file_exists($path) ? include($path) : include $this->view('Error');
+                $this->view('reservation/');
             }
         }
 
