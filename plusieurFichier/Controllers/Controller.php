@@ -9,7 +9,7 @@ class Controller
      * @param $file à afficher.
      */
     public function view($file, $data = []) {
-        $path = "View/".$file.".php.";
+        $path = "View/".$file.".php";
 
         if (file_exists($path)) {
 
